@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: transaction-ingestion-service
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/fraud_platform
+      auto-index-creation: true # Without this flag, `@Indexed` annotations are **completely ignored** at runtime. Spring Data MongoDB disabled auto index creation by default in newer versions to avoid accidental index creation in production.
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all                    # wait for all replicas to confirm
+      retries: 3                   # retry on transient failures
+      properties:
+        enable.idempotence: true   # exactly-once producer semantics
+
+kafka:
+  topics:
+    transaction-created: transaction.created
+
+server:
+  port: 8081
