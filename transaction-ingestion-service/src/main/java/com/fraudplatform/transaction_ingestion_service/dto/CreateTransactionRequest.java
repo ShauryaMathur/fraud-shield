@@ -16,9 +16,6 @@ public class CreateTransactionRequest {
     @NotBlank(message = "idempotencyKey is required")
     private String idempotencyKey;
 
-    @NotBlank(message = "userId is required")
-    private String userId;
-
     @NotBlank(message = "merchantId is required")
     private String merchantId;
 

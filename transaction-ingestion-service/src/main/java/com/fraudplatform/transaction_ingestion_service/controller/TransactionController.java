@@ -8,6 +8,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,14 +24,16 @@ public class TransactionController {
     public CreateTransactionResponse createTransaction(
             @Valid @RequestBody CreateTransactionRequest request) {
 
-        log.info("Received transaction request userId={} amount={}",
-                request.getUserId(), request.getAmount());
+        String userId = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        return transactionService.createTransaction(request);
+        log.info("Received transaction request userId={} amount={}",
+                userId, request.getAmount());
+
+        return transactionService.createTransaction(request, userId);
     }
 
     @GetMapping("/{transactionId}")
-    public Transaction getTransaction(@PathVariable String transactionId) throws Exception {
+    public Transaction getTransaction(@PathVariable String transactionId) {
         // add this to repository: Optional<Transaction> findById(String id)
         return transactionService.getTransactionById(transactionId);
     }

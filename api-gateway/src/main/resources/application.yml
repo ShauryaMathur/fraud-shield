@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: api-gateway
+
+  cloud:
+    gateway:
+      routes:
+        - id: user-account-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/v1/auth/**, /api/v1/accounts/**, /api/v1/beneficiaries/**
+
+        - id: payment-initiation-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/v1/payments/**
+
+        - id: transaction-ingestion-service
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/v1/transactions/**
+
+        - id: fund-transfer-service
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/v1/transfers/**
+
+        - id: fraud-rules-engine
+          uri: http://localhost:8085
+          predicates:
+            - Path=/api/v1/fraud/**
+
+        - id: case-management-service
+          uri: http://localhost:8087
+          predicates:
+            - Path=/api/v1/cases/**
+
+server:
+  port: 8080
+
+jwt:
+  secret: 29DB7F816E6123272AC644AC0E7DCF85C15C7F1A422966993072413CFA06DBC3
+  expiration: 86400000

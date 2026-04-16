@@ -44,4 +44,11 @@ public class GlobalExceptionHandler {
         log.error("Unexpected error", ex);
         return Map.of("error", "Internal server error");
     }
+
+    @ExceptionHandler(TransactionNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public Map<String, String> handleTransactionNotFound(TransactionNotFoundException ex) {
+        log.error("Transaction not found exception: {}", ex.getMessage());
+        return Map.of("error", ex.getMessage());
+    }
 }

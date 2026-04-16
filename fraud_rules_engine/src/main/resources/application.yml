@@ -1,0 +1,49 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/fraud_platform
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+
+  application:
+    name: fraud-rules-engine
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: fraud-rules-engine-group
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: "com.fraudplatform.*"
+        spring.json.value.default.type: com.fraudplatform.fraud_rules_engine.model.TransactionEvent
+        spring.json.use.type.headers: false
+
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      acks: all                    # wait for all replicas to confirm
+      retries: 3                   # retry on transient failures
+      properties:
+        enable.idempotence: true   # exactly-once producer semantics
+
+kafka:
+  topics:
+    transaction-created: transaction.created
+    fraud-alert-created: fraud.alert.created
+
+server:
+  port: 8082
