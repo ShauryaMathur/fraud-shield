@@ -10,5 +10,5 @@ import java.util.List;
 public class JwtClaims {
     private String userId;
     private String role;
-    private List<String> permissions;
+    private String permissions;
 }

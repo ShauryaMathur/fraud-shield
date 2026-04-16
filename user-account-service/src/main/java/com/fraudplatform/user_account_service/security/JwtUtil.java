@@ -1,6 +1,5 @@
 package com.fraudplatform.user_account_service.security;
 
-import com.fraudplatform.user_account_service.entity.Permission;
 import com.fraudplatform.user_account_service.entity.Role;
 import com.fraudplatform.user_account_service.entity.RolePermission;
 import io.jsonwebtoken.Claims;

@@ -4,24 +4,20 @@ import lombok.*;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "users")
+import java.math.BigDecimal;
+
+@Document(collection = "accounts")
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User extends BaseDocument{
+public class Account extends BaseDocument{
 
+    @Indexed(unique = false)
     private String userId;
 
-    private String fullName;
+    private AccountType accountType;
 
-    @Indexed(unique = true)
-    private String email;
-
-    private String password;
-
-    private String address;
-
-    private KycStatus kycStatus;
+    private BigDecimal balance;
 }

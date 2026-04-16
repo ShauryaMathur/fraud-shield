@@ -41,7 +41,6 @@ public class JwtAuthFilter implements GlobalFilter {
         String path =  exchange.getRequest().getURI().getPath();
 
         if(isPublicPath(path)){
-            log.info("Public Link");
             return chain.filter(exchange);
         }
 
@@ -64,7 +63,7 @@ public class JwtAuthFilter implements GlobalFilter {
             ServerHttpRequest request = exchange.getRequest().mutate()
                     .header("X-User-Id", claims.getUserId())
                     .header("X-User-Role", claims.getRole())
-                    .header("X-User-Permissions", String.join(",", claims.getPermissions()))
+                    .header("X-User-Permissions", claims.getPermissions())
                     .build();
 
             return chain.filter(exchange.mutate().request(request).build());

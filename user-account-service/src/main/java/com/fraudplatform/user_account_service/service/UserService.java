@@ -1,7 +1,5 @@
 package com.fraudplatform.user_account_service.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fraudplatform.user_account_service.dto.AuthResponse;
 import com.fraudplatform.user_account_service.dto.LoginRequest;
 import com.fraudplatform.user_account_service.dto.SignupRequest;
@@ -37,7 +35,6 @@ public class UserService {
     private final RoleRepository roleRepository;
     private final RolePermissionsRepository rolePermissionsRepository;
     private final JwtUtil jwtUtil;
-    private final ObjectMapper objectMapper;
 
     @Transactional
     public AuthResponse signup(SignupRequest signupRequest) {
@@ -85,15 +82,9 @@ public class UserService {
 
         List<RolePermission> permissions = rolePermissionsRepository.findAllByRole(userRole.getRole());
 
-        try {
-            log.info("Permissions for role {} are {}", userRole.getRole(), objectMapper.writeValueAsString(permissions));
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-
         String token = jwtUtil.generateToken(user.getId(), permissions, userRole.getRole());
 
-        log.info("New user registered email={} userId={}", loginRequest.getEmail(), user.getEmail());
+        log.info("User logged in with email={} userId={}", loginRequest.getEmail(), user.getEmail());
 
         return new AuthResponse(token, user.getUserId(), loginRequest.getEmail());
     }

@@ -52,8 +52,8 @@ public class JwtUtil {
 
         return JwtClaims.builder()
                 .userId(claims.getSubject())
-                .role(claims.get("role", String.class))
-                .permissions((List<String>) claims.get("permissions"))
+                .role((String) claims.get("role"))
+                .permissions((String) claims.get("permissions"))
                 .build();
     }
 
