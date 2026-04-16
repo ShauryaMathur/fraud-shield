@@ -25,7 +25,7 @@ public class JwtAuthFilter implements GlobalFilter {
     private final JwtUtil jwtUtil;
 
     private static final List<String> PUBLIC_PATHS = List.of(
-            "/api/v1/auth/register",
+            "/api/v1/auth/signup",
             "/api/v1/auth/login",
             "/actuator"
     );
@@ -41,6 +41,7 @@ public class JwtAuthFilter implements GlobalFilter {
         String path =  exchange.getRequest().getURI().getPath();
 
         if(isPublicPath(path)){
+            log.info("Public Link");
             return chain.filter(exchange);
         }
 

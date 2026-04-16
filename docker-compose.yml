@@ -37,7 +37,7 @@ services:
     ports:
       - "27017:27017"
     environment:
-      MONGO_INITDB_DATABASE: fraud_platform
+      MONGO_INITDB_DATABASE: fraud_shield
 
   mysql:
     image: mysql:8.0
@@ -45,7 +45,7 @@ services:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: fraud_platform
+      MYSQL_DATABASE: fraud_shield
     volumes:
       - mysql_data:/var/lib/mysql
 

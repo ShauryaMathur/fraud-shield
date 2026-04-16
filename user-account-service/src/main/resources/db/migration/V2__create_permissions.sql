@@ -1,0 +1,6 @@
+CREATE TABLE permissions (
+     id BIGINT AUTO_INCREMENT PRIMARY KEY,
+     value VARCHAR(100) NOT NULL UNIQUE,
+     created_at TIMESTAMP NOT NULL,
+     updated_at TIMESTAMP NOT NULL
+);

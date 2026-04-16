@@ -1,0 +1,37 @@
+spring:
+  application:
+    name: user-account-service
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/fraud_shield
+      auto-index-creation: true
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/fraud_shield
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+    defer-datasource-initialization: false
+
+  # Flyway
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: true
+    validate-on-migrate: true
+
+server:
+  port: 8081
+
+jwt:
+  secret: 29DB7F816E6123272AC644AC0E7DCF85C15C7F1A422966993072413CFA06DBC3
+  expiration: 86400000
