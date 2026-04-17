@@ -1,5 +1,6 @@
-package com.fraudplatform.user_account_service.model;
+package com.fraudplatform.user_account_service.model.user;
 
+import com.fraudplatform.user_account_service.model.BaseDocument;
 import lombok.*;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -10,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User extends BaseDocument{
+public class User extends BaseDocument {
 
     private String userId;
 

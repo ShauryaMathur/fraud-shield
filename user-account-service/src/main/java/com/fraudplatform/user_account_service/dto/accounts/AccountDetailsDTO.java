@@ -1,6 +1,6 @@
 package com.fraudplatform.user_account_service.dto.accounts;
 
-import com.fraudplatform.user_account_service.model.AccountType;
+import com.fraudplatform.user_account_service.model.account.AccountType;
 import lombok.Builder;
 import lombok.Data;
 

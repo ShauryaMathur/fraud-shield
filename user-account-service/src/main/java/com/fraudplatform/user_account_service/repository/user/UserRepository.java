@@ -1,6 +1,6 @@
-package com.fraudplatform.user_account_service.repository;
+package com.fraudplatform.user_account_service.repository.user;
 
-import com.fraudplatform.user_account_service.model.User;
+import com.fraudplatform.user_account_service.model.user.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.util.Optional;

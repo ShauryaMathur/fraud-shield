@@ -1,4 +1,4 @@
-package com.fraudplatform.user_account_service.repository;
+package com.fraudplatform.user_account_service.repository.user;
 
 import com.fraudplatform.user_account_service.entity.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
